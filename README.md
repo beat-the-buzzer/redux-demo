@@ -37,9 +37,11 @@
 
 ##### 例子实现的小目标
 
-一个输入框，可以输入文本，点击上方按钮可以把刚刚输入的文本作为待办项展示在页面上；待办项左侧可以选择状态；待办项右侧可以删除这一项；下方是筛选条件，可以筛选出符合条件的待办项
+一个输入框，可以输入文本，点击上方按钮可以把刚刚输入的文本作为待办项展示在页面上；待办项左侧可以选择状态；待办项右侧可以删除这一项；下方是筛选条件，可以筛选出符合条件的待办项。
 
-(图片区域)
+![](https://raw.githubusercontent.com/beat-the-buzzer/pictures/master/redux-demo/redux-demo1.jpg)
+
+上图是《深入浅出React和Redux》这本书里面demo的运行结果，我这个项目比这个demo还要简单一点，只有添加和显示两个功能。
 
 ##### Get Started!
 
@@ -69,7 +71,7 @@ redux有action，reducer，还有一个就是store，store一般都是位于顶�
 
 大致结构如图所示：
 
-(图片区域)
+![](https://raw.githubusercontent.com/beat-the-buzzer/pictures/master/redux-demo/redux-demo4.png)
 
 3、Provider & store
 
@@ -157,5 +159,13 @@ mapStateToProps，是把状态树作为组件的props，这样就可以在this.p
 	export default connect(null,mapDispatchToProps)(AddTodo);
 
 其实，这只是我的个人喜好，因为一个组件使用redux，只有“访问状态树”和“改变状态树”这两种操作，我留一个null，正是虚位以待。
+
+参考地址：
+
+	https://github.com/mocheng/react-and-redux
+
+参考书籍：
+
+	《深入浅出React和Redux》
 
 
