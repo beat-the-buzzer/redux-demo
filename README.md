@@ -168,4 +168,6 @@ mapStateToProps，是把状态树作为组件的props，这样就可以在this.p
 
 	《深入浅出React和Redux》
 
+项目运行：[https://beat-the-buzzer.github.io/redux-demo/](https://beat-the-buzzer.github.io/redux-demo/)
+
 
