@@ -170,4 +170,18 @@ mapStateToProps，是把状态树作为组件的props，这样就可以在this.p
 
 项目运行：[https://beat-the-buzzer.github.io/redux-demo/](https://beat-the-buzzer.github.io/redux-demo/)
 
+更新部分：使用装饰器语法
+
+	npm install babel-plugin-transform-decorators-legacy -D
+
+找到`node_modules/babel-preset-react-app/index.js`，然后加入装饰器支持;接着在对应的package.json下边加入babel-plugin-transform-decorators-legacy。
+
+	class MyComponent extends React.Component {};
+	export default connect(mapStateToProps, mapDispatchToProps)(MyComponent);
+
+	@connect(mapStateToProps, mapDispatchToProps)
+	export default class MyComponent extends React.Component {};
+
+详见components/TodoList/TodoList.jsx
+
 
