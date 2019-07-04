@@ -1,9 +1,6 @@
 import React,{ Component } from 'react';
 import { connect } from 'react-redux';
 
-
-
-
 class TodoList extends Component {
 	render(){
 		console.log(this.props);
@@ -23,6 +20,5 @@ class TodoList extends Component {
 const mapStateToProps = (todos = []) => {
 	return {todos};
 };
-
 
 export default connect(mapStateToProps,null)(TodoList);

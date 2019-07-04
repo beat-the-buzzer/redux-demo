@@ -1,4 +1,8 @@
-#### 从create-react-app到redux-demo
+## 从create-react-app到redux-demo
+
+##### 项目运行地址
+
+项目运行：[https://beat-the-buzzer.github.io/redux-demo/](https://beat-the-buzzer.github.io/redux-demo/)
 
 ##### redux概述
 
@@ -33,7 +37,9 @@
 4、状态树和组件之间友谊的小船——connect
 > connect是一个高阶函数，用于连接状态树和组件，一般我们这么使用：
 
-	connect(mapStateToProps,mapDispatchToProps)(ComponentName)
+```js
+connect(mapStateToProps,mapDispatchToProps)(ComponentName)
+```
 
 ##### 例子实现的小目标
 
@@ -49,13 +55,16 @@
 
 这是人人都能使用的react项目，首先执行命令：
 
-	create-react-app redux-demo
-
+```shell
+create-react-app redux-demo
+```
 就会生成相应的项目文件，我们首先把目光放在package.json文件中。这里没有redux相关的依赖项，我们需要自己去安装
 
-	cd redux-demo
-	npm install redux --save
-	npm install react-redux --save
+```shell
+cd redux-demo
+npm install redux --save
+npm install react-redux --save
+```
 
 命令执行完成之后，发现package.json里面的dependencies多了两行。这样，以后在运行代码的时候，直接npm install,redux也会被安装。后面会说什么时候使用redux，什么时候使用react-redux
 
@@ -77,19 +86,22 @@ redux有action，reducer，还有一个就是store，store一般都是位于顶�
 
 index.js中，Provider组件包裹着所有组件，并且把store作为props，这样可以让所有子组件都能访问到store。Provider组件来自于react-redux：
 
-	ReactDOM.render(
-		<Provider store={store}>
-			<Todo />
-		</Provider>, 
-		document.getElementById('root')
-	);
+```jsx
+ReactDOM.render(
+  <Provider store={store}>
+    <Todo />
+  </Provider>, 
+  document.getElementById('root')
+);
+```
 
 4、store & reducer & createStore & combineReducers
 
 store.js里面应该要有什么呢？答案是：需要保存的状态树。如何改变状态树？答案是：reducer。也就是说，状态树是从reducer里面来的。所以，我们在store.js中，需要引入的文件是，所有reducer.js，然后使用createStore方法，，顾名思义，创建store。如果一个项目有多个reducer，就使用combineReducers方法，把多个reducer结合在一起。这里的createStore、combineReducers，都是来自于redux。
 
-	const store = createStore(todos);
-
+```js
+const store = createStore(todos);
+```
 5、action & reducer
 
 这两个文件是redux中最重要的。
@@ -100,37 +112,40 @@ action.js:
  - 它是一个普通的js对象；
  - 由方法生成
  - 必须有一个type
- 
-		let num = 0;
-		const addTodo = (text)=>{
-			return {
-				type:'ADD_TODO',
-				id:num ++,
-				text
-			}
-		}
 
+```js
+let num = 0;
+const addTodo = (text) => {
+  return {
+    type:'ADD_TODO',
+    id:num ++,
+    text
+  }
+}
+```
 reducer.js:
 
  - reducer是响应的抽象
  - 它是一个纯方法(不依赖外部变量)
  - 传入旧的state和action，返回一个新的状态
 
-		const todos = (state = [], action) => {
-			switch (action.type) {
-				case 'ADD_TODO':
-					return [
-						...state,
-						{
-							text: action.text,
-							id: action.id,
-							completed: false,
-						}
-					];
-				default :
-					return state;
-			}
-		}
+```js
+const todos = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return [
+        ...state,
+        {
+          text: action.text,
+          id: action.id,
+          completed: false,
+        }
+      ];
+    default :
+      return state;
+  }
+}
+```
 
 其实，状态树的设计就是从reducer里面开始的，初始化state是一个空数组，说明store里面存的状态树，就是一个数组，数组元素的结构，就是在'ADD_TODO'里面决定的，数组的每个元素都是一个对象。
 
@@ -142,7 +157,9 @@ view.js没什么内容，只有组件引入。这里有一点我想说一下：�
 
 mapDispatchToProps，是把Dispatch作为组件的props,因为，dispatch一个action，是改变状态树的唯一办法。mapDispatchToProps可以把dispatch作为改变状态树的接口函数。当然，也可以这样写：
 
-	const { dispatch } = this.props;
+```js
+const { dispatch } = this.props;
+```
 
 我第一次见到这样的代码的时候也很困惑，实际上是因为使用了connect方法，才使得dispatch成为了组件的props。
 
@@ -156,7 +173,9 @@ mapStateToProps，是把状态树作为组件的props，这样就可以在this.p
 
 其他问题：使用connect的时候，为什么要这样：
 
-	export default connect(null,mapDispatchToProps)(AddTodo);
+```js
+export default connect(null,mapDispatchToProps)(AddTodo);
+```
 
 其实，这只是我的个人喜好，因为一个组件使用redux，只有“访问状态树”和“改变状态树”这两种操作，我留一个null，正是虚位以待。
 
@@ -176,12 +195,12 @@ mapStateToProps，是把状态树作为组件的props，这样就可以在this.p
 
 找到`node_modules/babel-preset-react-app/index.js`，然后加入装饰器支持;接着在对应的package.json下边加入babel-plugin-transform-decorators-legacy。
 
-	class MyComponent extends React.Component {};
-	export default connect(mapStateToProps, mapDispatchToProps)(MyComponent);
+```jsx
+class MyComponent extends React.Component {};
+export default connect(mapStateToProps, mapDispatchToProps)(MyComponent);
 
-	@connect(mapStateToProps, mapDispatchToProps)
-	export default class MyComponent extends React.Component {};
-
-详见components/TodoList/TodoList.jsx
+@connect(mapStateToProps, mapDispatchToProps)
+export default class MyComponent extends React.Component {};
+```
 
 
