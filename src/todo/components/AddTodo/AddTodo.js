@@ -1,46 +1,32 @@
-import React,{ Component } from 'react';
+import React,{ useState } from 'react';
 import { addTodo } from '../../action';
 import { connect } from 'react-redux';
 
+function AddTodo(props) {
+	const [value, setValue] = useState('');
 
-class AddTodo extends Component {
-	constructor(props){
-		super(props);
-		this.state = {
-			value: '',
-		};
+	function handleInput(e){
+		e.preventDefault();
+		setValue(e.target.value)
 	}
 
-	handleInput(e){
+	function handleSubmit(e){
 		e.preventDefault();
-		this.setState({
-			value: e.target.value,
-		});
-	}
-
-	handleSubmit(e){
-		e.preventDefault();
-		let { value } = this.state;
 		if(!value.trim()){
 			alert('请输入内容！');
 			return;
 		} else {
-			value = value.trim();
-			this.props.onAdd(value);
-			this.setState({
-				value: '',
-			});
+			props.onAdd(value.trim());
+			setValue('');
 		}
 	}
 
-	render(){
-		return (
-			<form onSubmit={this.handleSubmit.bind(this)}>
-				<input type="text" value={this.state.value} onChange={this.handleInput.bind(this)} />
-				<button type="submit">添加</button>
-			</form>
-		)
-	}
+	return (
+		<form onSubmit={(e) => handleSubmit(e)}>
+			<input type="text" value={value} onChange={(e) => handleInput(e)} />
+			<button type="submit">添加</button>
+		</form>
+	)
 }
 
 const mapDispatchToProps = (dispatch) => {
