@@ -45,7 +45,7 @@ connect(mapStateToProps,mapDispatchToProps)(ComponentName)
 
 一个输入框，可以输入文本，点击上方按钮可以把刚刚输入的文本作为待办项展示在页面上；待办项左侧可以选择状态；待办项右侧可以删除这一项；下方是筛选条件，可以筛选出符合条件的待办项。
 
-![](https://raw.githubusercontent.com/beat-the-buzzer/pictures/master/redux-demo/redux-demo1.jpg)
+![](https://gitee.com/beat-the-buzzer/pictures/raw/master/redux-demo/redux-demo1.jpg)
 
 上图是《深入浅出React和Redux》这本书里面demo的运行结果，我这个项目比这个demo还要简单一点，只有添加和显示两个功能。
 
@@ -80,7 +80,7 @@ redux有action，reducer，还有一个就是store，store一般都是位于顶�
 
 大致结构如图所示：
 
-![](https://raw.githubusercontent.com/beat-the-buzzer/pictures/master/redux-demo/redux-demo4.png)
+![](https://gitee.com/beat-the-buzzer/pictures/raw/master/redux-demo/redux-demo4.png)
 
 3、Provider & store
 
@@ -194,6 +194,8 @@ export default connect(null,mapDispatchToProps)(AddTodo);
 	npm install babel-plugin-transform-decorators-legacy -D
 
 找到`node_modules/babel-preset-react-app/index.js`，然后加入装饰器支持;接着在对应的package.json下边加入babel-plugin-transform-decorators-legacy。
+
+或者使用 `npm run eject`去拿到项目完整的配置，然后新增装饰器插件。
 
 ```jsx
 class MyComponent extends React.Component {};
